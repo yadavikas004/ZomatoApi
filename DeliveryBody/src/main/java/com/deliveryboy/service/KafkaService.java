@@ -13,12 +13,15 @@ public class KafkaService {
 	private Logger logger = LoggerFactory.getLogger(KafkaService.class);
 
 	@Autowired
-	private KafkaTemplate<String,String> kafkaTemplate;
-	
+	private KafkaTemplate<String, String> kafkaTemplate;
+
 	public boolean updateLocation(String location) {
-		this.kafkaTemplate.send(AppConstants.LOCATION_TOPIC_NAME,location);
-		System.out.println("message produced");
-		this.logger.info("message produced");
-		return true;	
+		for (int i = 1; i <= 100000; i++) {
+			kafkaTemplate.send(AppConstants.LOCATION_TOPIC_NAME, location);
+			System.out.println("message produced"+i);
+			logger.info("message produced");
+			System.out.println("----------------");
+		}
+		return true;
 	}
 }
