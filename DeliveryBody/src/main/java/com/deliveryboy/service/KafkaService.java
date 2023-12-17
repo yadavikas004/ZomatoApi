@@ -16,12 +16,11 @@ public class KafkaService {
 	private KafkaTemplate<String, String> kafkaTemplate;
 
 	public boolean updateLocation(String location) {
-		for (int i = 1; i <= 100000; i++) {
-			kafkaTemplate.send(AppConstants.LOCATION_TOPIC_NAME, location);
-			System.out.println("message produced"+i);
-			logger.info("message produced");
-			System.out.println("----------------");
-		}
+		kafkaTemplate.send(AppConstants.LOCATION_TOPIC_NAME, location);
+		System.out.println("message produced");
+		logger.info("message produced");
+		System.out.println("----------------");
+
 		return true;
 	}
 }
